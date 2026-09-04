@@ -1,5 +1,29 @@
 # Setup Guide
 
+## Before anything: the ground-truth files
+
+`reference/sap-project-standards.md` and `reference/adt-mcp-usage.md` are cited by
+almost every skill. Keep the `reference/` folder next to `skills/` wherever you
+deploy, and edit `reference/sap-project-standards.md` first whenever a
+project-wide assumption changes (target edition, release, namespace, tier rules)
+— the skills read from it rather than hardcoding.
+
+## ADT MCP (`adt-mcp`) — live ABAP system access
+
+The code and architecture skills use an abap-adt-api based MCP server for live
+system reads (object source, DDIC/CDS metadata, where-used, API release state,
+ATC, ABAP Unit) and, on explicit confirmation, writes (create/activate/transport).
+
+1. Configure the `adt-mcp` server in your Claude Code / Claude Desktop MCP
+   settings with the target ABAP system's connection and credentials.
+2. Verify it connects (`/mcp` in Claude Code, or the MCP status panel). If it
+   fails, skills fall back to working from pasted code and mark released-API
+   claims `[CONFIRM in ADT]` — they don't stall.
+3. Safety rule enforced by every skill: **reads are automatic, writes never
+   happen without you confirming the exact object list + package + transport in
+   the same turn.** Review skills (`clean-abap-code-reviewer`,
+   `abap-cloud-readiness-checker`, `architecture-reviewer`) never write.
+
 ## Claude Desktop
 
 1. Copy the folders under `skills/` into your personal Claude skills
@@ -40,8 +64,12 @@
    `.github/prompts/` folder in your ABAP project repo. In VS Code Copilot
    Chat, run them with `/workshop-notes`, `/functional-spec-draft`,
    `/clean-core-extensibility-check`, `/clean-abap-review`,
-   `/abap-cloud-readiness`, `/coe-session-planner` — select code/text first
-   so `${selection}` has something to work on.
+   `/abap-cloud-readiness`, `/coe-session-planner`, `/solution-design-review`,
+   `/rap-bo-scaffold`, `/cds-view-scaffold`, `/abap-unit-test`,
+   `/odata-service-expose` — select code/text first so `${selection}` has
+   something to work on. The generation prompts assume the standards in
+   `reference/sap-project-standards.md`; copy `reference/` into the project repo
+   too, or paste the relevant rules when Copilot can't see it.
 3. Keep this `sap-technical-assets` repo as the source of truth; re-copy
    into project repos when you update a prompt here.
 

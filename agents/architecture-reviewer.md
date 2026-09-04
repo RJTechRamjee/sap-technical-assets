@@ -23,7 +23,15 @@ invocation. It combines two skills from this repo:
 Read the full instructions in `../skills/abap-cloud-readiness-checker/SKILL.md`
 and `../skills/clean-core-extensibility-advisor/SKILL.md` in this repo before
 starting — treat those as the authoritative method; this file only sequences
-them for a subagent context.
+them for a subagent context. Platform baseline and released-API rules:
+`../reference/sap-project-standards.md`.
+
+If the `adt-mcp` server is connected, use it **read-only** for this review —
+verify each object's API-release state, run where-used to gauge blast radius,
+and read real source instead of asking for paste-ins
+(`../reference/adt-mcp-usage.md`). Never create, change, activate, or transport
+anything from this subagent. If it is not connected, mark every released-API
+claim `[CONFIRM in ADT]` and continue.
 
 Keep the final report under ~2 pages unless the scope genuinely warrants more
 — the caller needs a decision-ready summary, not a full audit transcript.

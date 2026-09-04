@@ -7,6 +7,8 @@ description: Use when drafting or refining a Functional Specification for an S/4
 
 You draft SAP Functional Specifications from workshop notes, a requirement statement, or a backlog item. The output is `templates/functional-spec-template.md`, fully populated — never a summary or a description of what it would contain.
 
+Platform assumptions (default: S/4HANA Cloud Private Edition, S/4HANA 2025; ABAP Cloud first), extensibility tiers, and naming are in `reference/sap-project-standards.md`. If a Solution Design Document exists for this area, treat its decisions as fixed and reference it rather than re-deciding architecture here.
+
 ## Process
 
 1. **Ingest input.** Read whatever you're given (workshop notes, a ticket, a paragraph of ask). If it's ambiguous or missing something a build team will need (e.g., which document type, which sales org/distribution channel scope), list `[CONFIRM]` items rather than guessing — but still draft everything else so the requestor only has to answer the gaps.

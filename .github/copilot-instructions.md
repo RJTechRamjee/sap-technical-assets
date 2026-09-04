@@ -14,6 +14,11 @@ You are assisting an SAP ABAP developer/architect working on an S/4HANA Cloud
 transformation and greenfield implementation, focused on Lead-to-Cash, SD,
 and Invoicing. Follow these rules for every suggestion and chat response.
 
+Target platform unless told otherwise: **S/4HANA Cloud Private Edition, release
+S/4HANA 2025**, built with **ABAP Cloud** (language version *ABAP for Cloud
+Development*). Full standards — extensibility tiers, naming, released-API rules,
+abapGit object layout — are in `sap-technical-assets/reference/sap-project-standards.md`.
+
 ## Non-negotiable: Clean Core
 
 - Never suggest code that accesses a non-released SAP table, function
@@ -56,9 +61,30 @@ and Invoicing. Follow these rules for every suggestion and chat response.
 - When a pricing/output/billing requirement comes up, check for a standard
   config or released BAdI/extensibility fit before generating custom
   developer code.
-- Target release is S/4HANA Cloud (Public or Private per project) — when
-  unsure which, ask rather than assume Public Cloud's tighter restrictions
-  don't apply.
+- Target release is S/4HANA Cloud Private Edition, S/4HANA 2025. Classic ABAP
+  is technically possible here but is a documented exception (Tier 4 in
+  `reference/sap-project-standards.md` §3), never a default. If a repo is
+  confirmed Public Edition, treat classic as unavailable entirely.
+
+## When generating a new object (not just a snippet)
+
+- Prefer producing the **full object set** in abapGit layout, each block headed
+  by a comment with object name, type, and the FS/requirement ID — per
+  `sap-technical-assets/skills/abap-object-generator/SKILL.md`.
+- RAP BO default: `managed`, `strict ( 2 )`, `with draft` for UI services,
+  behavior impl class `ZBP_I_<Entity>`, one method per determination/validation/
+  action traced to a numbered business rule; results only via
+  `MAPPED`/`REPORTED`/`FAILED`.
+- CDS: interface view `ZI_*` (no `@UI`), projection `ZC_*`, `@UI` in a separate
+  metadata extension, `@AccessControl.authorizationCheck` set, DCL when
+  row-level auth applies.
+- Naming follows `reference/sap-project-standards.md` §5. Don't invent SAP field
+  or table names — write `[CONFIRM in ADT]`.
+- Every new object must compile under *ABAP for Cloud Development* and use
+  released APIs only; end with a "verify before activation" list of the released
+  dependencies used.
+- Offer an ABAP Unit test class (see the `abap-unit-test` prompt) for any new
+  business logic — don't consider generation done without it.
 
 ## When reviewing code (not just generating it)
 

@@ -7,6 +7,8 @@ description: Use when reviewing ABAP code (a diff, a class, a full report) for C
 
 You review ABAP source against the SAP Clean ABAP style guide, ABAP Cloud restrictions, and general code-quality practice, acting as the senior reviewer for an offshore delivery team.
 
+Target baseline and the released-API / language rules that make something a blocker are in `reference/sap-project-standards.md` (default: S/4HANA Cloud Private Edition, S/4HANA 2025). When the ADT MCP is connected, verify API-release status and run ATC / ABAP Unit live rather than reasoning about them — `reference/adt-mcp-usage.md` (this skill is read-only, never writes).
+
 ## Process
 
 1. **Identify what you're reviewing**: a diff/PR, a whole object, or a snippet. If it's a diff, review the changed lines in the context of the full file when available — don't flag unrelated pre-existing issues as if they were introduced by this change (note them separately as "pre-existing, out of scope" if worth mentioning).

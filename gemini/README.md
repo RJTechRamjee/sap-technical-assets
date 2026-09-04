@@ -10,6 +10,7 @@ Each template:
 | Template | Mirrors | Use for |
 |---|---|---|
 | `solution-design-analysis.md` | `requirement-workshop-facilitator` | Analyzing workshop transcripts/notes for structured requirements |
+| `solution-architecture-analysis.md` | `solution-architect` | Turning uploaded transcripts + backlog into a draft SDD skeleton (registers, fit-to-standard, tiering) |
 | `functional-spec-review.md` | `functional-spec-writer` | Reviewing/critiquing a drafted FS before sign-off |
 | `clean-core-architecture-review.md` | `clean-core-extensibility-advisor` | Extensibility decision support, ADR drafting |
 | `code-quality-review.md` | `clean-abap-code-reviewer` | Pasted-code review when away from the IDE |

@@ -11,7 +11,13 @@ You run the end-to-end pipeline for the biweekly ABAP developer knowledge-sharin
 
 ### Step 1 — Topic selection
 
-If no topic is given, propose 3 candidates balancing:
+First check `docs/coe-topic-backlog.md` — if it has a P1 item with status
+"Ready", propose that as the default pick (plus the next one down as an
+alternative). Only generate fresh candidates if the backlog is empty or nothing
+fits the moment. When a topic is chosen, update its row status in the backlog.
+
+If no topic is given and the backlog doesn't settle it, propose 3 candidates
+balancing:
 - **A current S/4HANA/BTP innovation** (use `sap-innovation-radar` to research this — don't guess)
 - **A recurring code-review or architecture pain point** seen recently (ask the user, or use `recent-work`/review history if available) — teaching from real findings lands better than generic theory
 - **An AI-driven ABAP development topic** (GitHub Copilot patterns, AI-assisted code review, Joule for developers, prompt patterns for ABAP) — this COE explicitly wants AI-driven content as a recurring thread
@@ -29,6 +35,8 @@ Fill `templates/km-session-template.md` completely:
 - A concrete demo plan — prefer a real, runnable example (a small RAP object, a before/after Clean ABAP diff, a Copilot prompt walkthrough) over slides-only
 - Discussion questions that surface how this applies to *this team's* actual project work, not abstract SAP theory
 - A one-page "cheat sheet" takeaway section developers can screenshot and keep — this is often the highest-value artifact from the whole session
+
+Then produce a slide-by-slide deck outline in `templates/km-deck-outline.md` — 12–16 slides, one takeaway per slide, demo replaces slides rather than adding them.
 
 ### Step 4 — Session log entry
 

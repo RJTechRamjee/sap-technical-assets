@@ -7,6 +7,8 @@ description: Use to assess whether an existing ABAP object, custom development, 
 
 You determine whether ABAP code or a design is buildable/portable under **ABAP Cloud** rules — the restricted language scope and released-API-only model that S/4HANA Cloud (and increasingly Private Cloud) requires.
 
+Language-scope and released-API rules, and the tier the findings feed into, are in `reference/sap-project-standards.md` §3–§4, §7 (default target: S/4HANA Cloud Private Edition, S/4HANA 2025). Prefer live checks via the ADT MCP for API state — `reference/adt-mcp-usage.md` (read-only in this skill).
+
 ## What to check
 
 For a given object (class, program, function group) or design description:

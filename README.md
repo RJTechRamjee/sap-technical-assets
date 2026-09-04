@@ -7,18 +7,31 @@ knowledge-sharing program. Written once per topic, packaged for three tools:
 **Claude** (Desktop + Code), **GitHub Copilot** (VS Code/Eclipse), and
 **Gemini Notebook**.
 
-See `docs/setup-guide.md` for install steps per tool.
+See `docs/setup-guide.md` for install steps per tool. `CLAUDE.md` holds the
+authoring rules for this repo; `reference/` holds the platform ground truth every
+skill cites (default: **S/4HANA Cloud Private Edition, S/4HANA 2025, ABAP Cloud
+first**).
 
 ## Structure
 
 ```
+CLAUDE.md                  How to author/update assets here; default platform assumptions
+
+reference/                 Ground truth every skill cites (don't restate it in skills)
+  sap-project-standards.md   Platform, Clean Core dimensions, 3-tier extensibility, naming, released-API check, abapGit layout
+  adt-mcp-usage.md           adt-mcp contract: read freely, write only on explicit confirmation
+
 skills/                    Claude Skills (source of truth — the fullest version of each method)
   requirement-workshop-facilitator/
+  solution-architect/            SDD above FS level: process/app/integration/data architecture + extensibility register
   functional-spec-writer/
   clean-core-extensibility-advisor/
   sap-innovation-radar/
+  abap-object-generator/         Full abapGit-style RAP / CDS / OData / released-BAdI object sets
+  abap-unit-test-writer/         RAP behavior + CDS + class test doubles, traced to FS rules
   clean-abap-code-reviewer/
   abap-cloud-readiness-checker/
+  rfp-effort-estimator/          Technical build effort from an RFP: object breakdown, T-shirt sizing, roll-up, assumptions
   coe-session-planner/
 
 .github/
@@ -29,26 +42,38 @@ gemini/                    Copy-paste prompt templates for Gemini Notebook analy
 
 templates/                 Shared output templates every tool fills in
   functional-spec-template.md
+  solution-design-document.md
+  interface-spec-template.md
   workshop-notes-template.md
   clean-core-adr-template.md
   clean-abap-review-checklist.md
+  effort-estimate-template.md
   km-session-template.md
+  km-deck-outline.md
 
 agents/                    Optional Claude Code subagent wrapper(s)
 
 docs/
   setup-guide.md            How to install/use each tool's variant
   coe-session-log.md         Running history of KM sessions (append via coe-session-planner)
+  coe-topic-backlog.md       Ranked backlog the session planner pulls from
 ```
 
 ## Coverage by responsibility
 
 | Responsibility | Skill(s) |
 |---|---|
-| Solution design & requirement workshops | `requirement-workshop-facilitator`, `functional-spec-writer` |
+| Requirement workshops | `requirement-workshop-facilitator` |
+| Solution design & architecture | `solution-architect` (SDD, interface specs), `functional-spec-writer` |
 | Clean Core architecture / extensibility | `clean-core-extensibility-advisor`, `sap-innovation-radar` |
+| ABAP development (generate) | `abap-object-generator`, `abap-unit-test-writer` |
 | Code quality / review | `clean-abap-code-reviewer`, `abap-cloud-readiness-checker` |
-| COE lead / biweekly knowledge-sharing | `coe-session-planner` (uses `sap-innovation-radar` for research) |
+| RFP technical effort estimation | `rfp-effort-estimator` |
+| COE lead / biweekly knowledge-sharing | `coe-session-planner` (uses `sap-innovation-radar`; pulls from `docs/coe-topic-backlog.md`) |
+
+Typical chain: `requirement-workshop-facilitator` → `solution-architect` →
+`functional-spec-writer` → `clean-core-extensibility-advisor` (ADR) →
+`abap-object-generator` → `abap-unit-test-writer` → `clean-abap-code-reviewer`.
 
 ## How the three tool variants relate
 
