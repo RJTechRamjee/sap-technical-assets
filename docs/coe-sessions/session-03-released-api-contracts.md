@@ -165,6 +165,6 @@ Keep to 45 min; this is a discipline session, not a deep dive.
 
 | Field | Value |
 |---|---|
-| Proposed topic | Hands-on with the ABAP MCP Server: wiring Copilot / Claude Code to a real ABAP system |
+| Proposed topic | Building an AI scenario into ABAP: the ABAP AI SDK powered by ISLM |
 | Proposed `ppt_date_time` | `2026-10-23 14:00 IST` `[CONFIRM]` |
-| Why this next | Session 1 introduced the ABAP MCP Server conceptually; sessions 2 and 3 gave the team the judgement to supervise an agent safely. This is the hands-on follow-up — setup, the tools it exposes, and what we will and won't let it do. Alternative if entitlement blocks it: "Diagnosing a pricing issue before writing a spec — the Pricing Analysis ladder." |
+| Why this next | Sessions 1–3 were about AI helping us *write* ABAP. This flips it: calling an LLM *from* ABAP via SAP AI Core, which is in standard delivery on our PCE 2025 and viable now that BTP + AI Core entitlement is available. Demo: a working AI scenario in a Lead-to-Cash context (comm scenario `SAP_COM_0A69`). Alternative if setup isn't ready: "Diagnosing a pricing issue before writing a spec — the Pricing Analysis ladder." |

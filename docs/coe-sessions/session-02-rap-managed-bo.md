@@ -24,11 +24,11 @@ side effects outside the save sequence, and results not returned through
 `MAPPED`/`REPORTED`/`FAILED`. Teaching the model once is cheaper than catching it
 per pull request.
 
-**Direct hook from session 1:** we saw Joule generate RAP validations and
-determinations in-context. That is only useful to a developer who can judge
-whether the generated logic sits in the right place. It will happily write you a
-determination where the rule should have been a validation — and it will look
-fine. This session is how you tell.
+**Direct hook from session 1:** we saw Copilot — instructed and MCP-grounded —
+generate RAP behavior code that looks right. It will happily write you a
+determination where the rule should have been a validation, and the result will
+compile and read fine. Generated code is only as good as the developer
+supervising it. This session is how you tell.
 
 ## 2. Learning Objectives
 

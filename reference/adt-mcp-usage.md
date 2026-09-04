@@ -4,15 +4,13 @@ The `adt-mcp` server (abap-adt-api based, read + write) gives skills a live brid
 to the ABAP system. Any skill that reasons about ABAP objects should use it when
 it is connected, and degrade gracefully when it is not.
 
-> **Worth evaluating — SAP's own ABAP MCP Server reached GA at Sapphire 2026.**
-> Built on the ABAP Language Server, it exposes ABAP development operations
-> (object management, transport request handling, syntax checks, documentation
-> and feature-matrix access) as MCP tools for any compatible client — Claude Code,
-> GitHub Copilot, Amazon Q — in both Eclipse and VS Code. It is the supported
-> path, where our current community/custom `adt-mcp` server is not. Verified
-> 2026-09-04; entitlement and licensing (consumption-based AI Units via SAP for Me)
-> need checking for this project before switching. The rules below apply to
-> whichever server is configured.
+> **Note on SAP's own ABAP MCP Server.** SAP's MCP Server reached GA at Sapphire
+> 2026 — built on the ABAP Language Server, exposing object management, transport
+> handling, syntax checks and documentation as MCP tools in Eclipse and VS Code.
+> **We do not have the entitlement for it** (it sits behind the same Joule for
+> Developers licensing, consumption-priced in AI Units), so the community
+> abap-adt-api based `adt-mcp` server remains our path. Verified 2026-09-04;
+> revisit only if entitlement is purchased. The rules below apply either way.
 
 ---
 
