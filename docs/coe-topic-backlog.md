@@ -19,9 +19,10 @@ notes here go stale.
 
 | Rank | Topic | Type | Why it matters now | Prep | Status |
 |---|---|---|---|---|---|
-| — | RAP managed BO end-to-end for classic ABAP developers | Practice | Core skill for the greenfield build; recurring review gaps in save-sequence use | M | **Scheduled — S01, `2026-09-11`** |
-| — | Reading a released-API contract in ADT (API state, successor, deprecation) | Practice | Prevents non-released usage getting into transports | S | **Scheduled — S02, `2026-09-25`** |
-| P1 | Using GitHub Copilot well for ABAP — prompt patterns, what it gets wrong | AI | Standing AI thread; proposed as S03 `2026-10-09` | S | Proposed for S03 |
+| — | How AI is reshaping ABAP — Joule for Developers, ABAP MCP Server, ABAP AI SDK | AI | Joule GA for PCE 2021+, ABAP MCP Server GA, AI SDK in standard delivery from release 2025; free promo period ended Sept 2026 | M | **Scheduled — S01, `2026-09-11`** |
+| — | RAP managed BO end-to-end for classic ABAP developers | Practice | Core skill for the greenfield build; recurring review gaps in save-sequence use | M | **Scheduled — S02, `2026-09-25`** |
+| — | Reading a released-API contract in ADT (API state, successor, deprecation) | Practice | Prevents non-released usage getting into transports; closes S01's "AI authorship ≠ compliance" rule | S | **Scheduled — S03, `2026-10-09`** |
+| P1 | Hands-on: wiring Copilot / Claude Code to the ABAP MCP Server | AI | Follow-up to S01; proposed as S04 `2026-10-23`. Needs entitlement confirmed first | M | Proposed for S04 |
 | P1 | Clean Core in Private Edition — the 3-tier model and when Tier 4 is really allowed | Practice | Team keeps reaching for enhancements; align on the exception bar. *Partly covered by S02 — rescope to the tier decision itself* | S | Ready (rescope) |
 | P1 | ABAP Unit for RAP: behavior test doubles, CDS test doubles | Practice | New logic shipping with thin/absent tests | M | Ready |
 | P1 | Diagnosing a pricing issue before writing a spec: the Pricing Analysis ladder | Practice | Most "pricing bugs" are a missing condition record or a failed access, not code — see `reference/pricing-condition-technique-reference.md` §9 | S | Ready |
@@ -31,7 +32,8 @@ notes here go stale.
 | P2 | Output management in S/4HANA: BRFplus-based determination vs classic NACE | Practice | Recurring on L2C requirements | M | Ready |
 | P2 | CDS access control (DCL) patterns for row-level authorization | Practice | Auth design questions on most models | M | Ready |
 | P2 | Enterprise Event Enablement: RAP raise-event to Integration Suite | Practice | Async integration pattern used across interfaces | M | Ready |
-| P2 | Joule for developers / AI in ABAP tooling — current state | AI | AI thread; separate hype from what's usable today | M — needs fresh research | Blocked on research |
+| P3 | ABAP AI SDK / ISLM deep-dive: building an AI scenario into an L2C app | AI | Standard delivery from release 2025 on our PCE; S01 introduces it, this builds one (comm scenario `SAP_COM_0A69`, SAP AI Core) | L | Ready |
+| P3 | The three custom code migration agents (Conversion, Clean Core Adoption, Web Dynpro→Fiori) | AI | Relevant when custom-code remediation starts; two of the three land later in 2026 | M — re-verify availability | Parked until GA |
 | P2 | Debugging RAP: common runtime errors and how to read them | Practice | Reduce time-to-fix in build phase | M | Ready |
 | P2 | Side-by-side on BTP ABAP: when and how it talks to S/4 | Practice | Architecture decisions need shared understanding | M | Ready |
 | P3 | ADT productivity: quick fixes, templates, refactoring, ABAP Cleaner | Practice | Nice quality-of-life session | S | Ready |

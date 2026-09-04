@@ -2,13 +2,13 @@
 
 | Field | Value |
 |---|---|
-| Session # | 01 |
+| Session # | 02 |
 | Topic | RAP managed Business Object end-to-end for classic ABAP developers |
 | Presenter | Ramjee |
-| **`ppt_date_time`** | `2026-09-11 14:00 IST` `[CONFIRM — day/time slot not yet fixed]` |
+| **`ppt_date_time`** | `2026-09-25 14:00 IST` `[CONFIRM — day/time slot not yet fixed]` |
 | Duration | 60 min |
 | Meeting link | `[CONFIRM]` |
-| Deck file | `COE-S01_2026-09-11_rap-managed-bo.pptx` |
+| Deck file | `COE-S02_2026-09-25_rap-managed-bo.pptx` |
 | Recording link | (fill after delivery) |
 | Audience | ABAP developer community (offshore) |
 | Status | Planned |
@@ -23,6 +23,12 @@ in recent code reviews are all RAP-shaped: business logic in the wrong handler,
 side effects outside the save sequence, and results not returned through
 `MAPPED`/`REPORTED`/`FAILED`. Teaching the model once is cheaper than catching it
 per pull request.
+
+**Direct hook from session 1:** we saw Joule generate RAP validations and
+determinations in-context. That is only useful to a developer who can judge
+whether the generated logic sits in the right place. It will happily write you a
+determination where the rule should have been a validation — and it will look
+fine. This session is how you tell.
 
 ## 2. Learning Objectives
 
@@ -168,5 +174,5 @@ attempt draft *and* actions *and* a child node in one live demo.
 | Field | Value |
 |---|---|
 | Proposed topic | Reading a released-API contract in ADT — what "Released" actually means |
-| Proposed `ppt_date_time` | `2026-09-25 14:00 IST` `[CONFIRM]` |
-| Why this next | You've just built a BO; session 2 makes sure everything it consumes is legal to consume. Natural pairing, and it closes the most expensive Clean Core mistake. |
+| Proposed `ppt_date_time` | `2026-10-09 14:00 IST` `[CONFIRM]` |
+| Why this next | You've just built a BO; session 3 makes sure everything it consumes is legal to consume. It also closes the loop on session 1's first governance rule — AI authorship is not compliance — by showing the check that proves it. |

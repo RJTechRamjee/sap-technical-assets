@@ -2,13 +2,13 @@
 
 | Field | Value |
 |---|---|
-| Session # | 02 |
+| Session # | 03 |
 | Topic | Reading a released-API contract in ADT — what "Released" actually means |
 | Presenter | Ramjee |
-| **`ppt_date_time`** | `2026-09-25 14:00 IST` `[CONFIRM — day/time slot not yet fixed]` |
+| **`ppt_date_time`** | `2026-10-09 14:00 IST` `[CONFIRM — day/time slot not yet fixed]` |
 | Duration | 45 min |
 | Meeting link | `[CONFIRM]` |
-| Deck file | `COE-S02_2026-09-25_released-api-contracts.pptx` |
+| Deck file | `COE-S03_2026-10-09_released-api-contracts.pptx` |
 | Recording link | (fill after delivery) |
 | Audience | ABAP developer community (offshore) |
 | Status | Planned |
@@ -19,9 +19,14 @@
 
 We are on **Private Edition**, where classic ABAP still compiles. That is the trap:
 the compiler will not stop a developer from consuming a non-released SAP object, so
-the mistake reaches the transport, then the upgrade. Session 1 built a business
+the mistake reaches the transport, then the upgrade. Session 2 built a business
 object; this session is about everything that object *consumes*. It is the cheapest
 Clean Core control we have — a two-minute check in ADT before you write the `SELECT`.
+
+**This also closes session 1's first governance rule.** AI assistants and agents
+will suggest non-released objects — they generate what looks idiomatic, not what
+our contract permits. This is the check that proves compliance regardless of who
+or what wrote the line.
 
 ## 2. Learning Objectives
 
@@ -160,6 +165,6 @@ Keep to 45 min; this is a discipline session, not a deep dive.
 
 | Field | Value |
 |---|---|
-| Proposed topic | Using GitHub Copilot well for ABAP — prompt patterns, and what it gets wrong |
-| Proposed `ppt_date_time` | `2026-10-09 14:00 IST` `[CONFIRM]` |
-| Why this next | Keeps the COE's standing AI thread alive on a biweekly-third cadence, and lands directly after two compliance-heavy sessions — the natural hook is "Copilot will happily suggest a non-released API; here's how sessions 1 and 2 protect you." |
+| Proposed topic | Hands-on with the ABAP MCP Server: wiring Copilot / Claude Code to a real ABAP system |
+| Proposed `ppt_date_time` | `2026-10-23 14:00 IST` `[CONFIRM]` |
+| Why this next | Session 1 introduced the ABAP MCP Server conceptually; sessions 2 and 3 gave the team the judgement to supervise an agent safely. This is the hands-on follow-up — setup, the tools it exposes, and what we will and won't let it do. Alternative if entitlement blocks it: "Diagnosing a pricing issue before writing a spec — the Pricing Analysis ladder." |
