@@ -38,12 +38,22 @@ Fill `templates/km-session-template.md` completely:
 
 Then produce a slide-by-slide deck outline in `templates/km-deck-outline.md` — 12–16 slides, one takeaway per slide, demo replaces slides rather than adding them.
 
-### Step 4 — Session log entry
+### Step 4 — Save the plan and log it
 
-Append a row to `docs/coe-session-log.md` (create the file with a header row if it doesn't exist yet) so the COE has a running history:
+1. Write the filled session plan to `docs/coe-sessions/session-<nn>-<topic-slug>.md`.
+2. Append a row to `docs/coe-session-log.md`:
 
-| # | Date | Topic | Presenter | Materials link |
-|---|---|---|---|---|
+| # | `ppt_date_time` | Topic | Presenter | Status | Deck file | Session plan |
+|---|---|---|---|---|---|---|
+
+3. Update the topic's row in `docs/coe-topic-backlog.md` to **Scheduled — S`<nn>`, `<date>`**.
+
+**`ppt_date_time` discipline:** every session carries a concrete
+`YYYY-MM-DD HH:MM` + timezone, and the deck file name is derived from it
+(`COE-S<nn>_<YYYY-MM-DD>_<topic-slug>.pptx`). If the slot isn't fixed, propose one
+on the biweekly cadence and mark it `[CONFIRM]` — never leave it blank, because
+the whole cadence stalls on an unscheduled session. Always fill §11 Next Session
+with the following topic and its proposed `ppt_date_time`.
 
 ## Recurring topic bank (seed ideas, refresh via sap-innovation-radar before using any of these)
 

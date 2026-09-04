@@ -3,11 +3,17 @@
 | Field | Value |
 |---|---|
 | Session # | |
-| Date | |
 | Topic | |
 | Presenter | |
+| **`ppt_date_time`** | `YYYY-MM-DD HH:MM` + timezone — the scheduled delivery slot |
+| Duration | 45 / 60 min |
+| Meeting link | |
+| Deck file | `COE-S<nn>_<YYYY-MM-DD>_<topic-slug>.pptx` |
+| Recording link | (fill after delivery) |
 | Audience | ABAP developer community (offshore) |
+| Status | Planned / Scheduled / Delivered / Cancelled |
 | Related SAP note / doc links | |
+| Related repo assets | (skills / reference files this session teaches from) |
 
 ## 1. Why This Topic, Now
 
@@ -53,7 +59,23 @@ Bullet list developers can screenshot and keep.
 
 -
 
-## 9. Feedback / Follow-ups Logged After Session
+## 9. Notes
 
-| Item | Raised by | Action |
-|---|---|---|
+**Prep notes** — decisions made while building this session, things to remember
+next time, material sourced from where.
+
+**Delivery notes** (fill after the session) — what landed, what didn't, timing
+that ran over or short, questions that came up repeatedly.
+
+## 10. Feedback / Follow-ups Logged After Session
+
+| Item | Raised by | Action | Owner | Status |
+|---|---|---|---|---|
+
+## 11. Next Session
+
+| Field | Value |
+|---|---|
+| Proposed topic | |
+| Proposed `ppt_date_time` | `YYYY-MM-DD HH:MM` + timezone (biweekly cadence) |
+| Why this next | |
