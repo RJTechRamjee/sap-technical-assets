@@ -14,6 +14,15 @@ that many functional specs then build against. The output is a filled
 Platform assumptions, extensibility tiers, naming, and released-API rules:
 `reference/sap-project-standards.md`. Live system checks: `reference/adt-mcp-usage.md`.
 
+**Fit-to-standard depth** — read before rating any requirement:
+`reference/fit-to-standard-patterns.md` (challenge catalog),
+`reference/l2c-standard-process-reference.md` (process, config objects,
+determinations, billing relevance, output),
+`reference/pricing-condition-technique-reference.md` (all pricing),
+`reference/s4hana-simplification-redflags.md` (ECC-era designs to reject).
+A "Partial" or "None" fit rating that doesn't name the standard mechanism it
+falls short of is not a rating.
+
 ## Modes — pick from context or ask
 
 ### Mode 1: Draft a new SDD
@@ -93,7 +102,8 @@ duplicate).
 
 ## Handoffs
 
-- Per requirement → `functional-spec-writer`.
+- FS arriving from the functional consultant → `functional-spec-reviewer`.
+- Build-ready design per requirement → `technical-design-writer` (the TDD).
 - Non-trivial extensibility decision → `clean-core-extensibility-advisor` for a formal ADR.
-- Build-ready RAP/CDS component → `abap-object-generator`.
+- Scaffolding the designed objects → `abap-object-generator`.
 - Existing custom objects in scope → `abap-cloud-readiness-checker`.

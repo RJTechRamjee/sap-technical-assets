@@ -11,7 +11,7 @@ Each template:
 |---|---|---|
 | `solution-design-analysis.md` | `requirement-workshop-facilitator` | Analyzing workshop transcripts/notes for structured requirements |
 | `solution-architecture-analysis.md` | `solution-architect` | Turning uploaded transcripts + backlog into a draft SDD skeleton (registers, fit-to-standard, tiering) |
-| `functional-spec-review.md` | `functional-spec-writer` | Reviewing/critiquing a drafted FS before sign-off |
+| `functional-spec-review.md` | `functional-spec-reviewer` | Reviewing the functional consultant's FS: fit-to-standard challenge, S/4 red flags, architect's solution position |
 | `clean-core-architecture-review.md` | `clean-core-extensibility-advisor` | Extensibility decision support, ADR drafting |
 | `code-quality-review.md` | `clean-abap-code-reviewer` | Pasted-code review when away from the IDE |
 | `coe-topic-research.md` | `sap-innovation-radar` + `coe-session-planner` | Researching a KM session topic against uploaded SAP docs |

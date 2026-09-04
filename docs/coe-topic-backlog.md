@@ -24,6 +24,9 @@ notes here go stale.
 | P1 | Reading a released-API contract in ADT (API state, successor, deprecation) | Practice | Prevents non-released usage getting into transports | S | Ready |
 | P1 | ABAP Unit for RAP: behavior test doubles, CDS test doubles | Practice | New logic shipping with thin/absent tests | M | Ready |
 | P1 | Using GitHub Copilot well for ABAP — prompt patterns, what it gets wrong | AI | This COE's standing AI thread; concrete team productivity | S | Ready |
+| P1 | Diagnosing a pricing issue before writing a spec: the Pricing Analysis ladder | Practice | Most "pricing bugs" are a missing condition record or a failed access, not code — see `reference/pricing-condition-technique-reference.md` §9 | S | Ready |
+| P1 | Reading a functional spec like an architect: the fit-to-standard challenge | Practice | Teaches the team to name the standard mechanism before proposing a build — `reference/fit-to-standard-patterns.md` | M | Ready |
+| P2 | ECC muscle memory vs S/4HANA 2025: the red-flag list | Practice | Rebates, credit, output, RevRec, BP, MATNR 40 — recurring in incoming specs | M | Ready |
 | P2 | S/4HANA 2025: what changed for SD / Billing (release-note walkthrough) | Innovation | Keep the team current; feeds design decisions | M — needs fresh research | Blocked on research |
 | P2 | Output management in S/4HANA: BRFplus-based determination vs classic NACE | Practice | Recurring on L2C requirements | M | Ready |
 | P2 | CDS access control (DCL) patterns for row-level authorization | Practice | Auth design questions on most models | M | Ready |

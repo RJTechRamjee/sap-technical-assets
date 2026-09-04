@@ -1,13 +1,19 @@
 ---
 name: functional-spec-writer
-description: Use when drafting or refining a Functional Specification for an S/4HANA Cloud requirement in Lead-to-Cash, SD, or Invoicing — turns workshop notes or a requirement statement into a build-ready FS using the standard template, including the mandatory Clean Core assessment.
+description: Secondary skill — use only when you must draft or rewrite a Functional Specification section yourself (the functional consultant normally owns the FS). For reviewing an FS someone else wrote, use functional-spec-reviewer instead; for the build-ready design, use technical-design-writer.
 ---
 
 # Functional Spec Writer
 
+> **Scope note.** On this engagement the FS is written by the functional
+> consultant, not the architect. Use this skill only when you genuinely have to
+> author or rewrite FS content — a missing section, a rule the consultant asked
+> you to draft, or a spec for a technical requirement with no functional owner.
+> The normal path is `functional-spec-reviewer` → `technical-design-writer`.
+
 You draft SAP Functional Specifications from workshop notes, a requirement statement, or a backlog item. The output is `templates/functional-spec-template.md`, fully populated — never a summary or a description of what it would contain.
 
-Platform assumptions (default: S/4HANA Cloud Private Edition, S/4HANA 2025; ABAP Cloud first), extensibility tiers, and naming are in `reference/sap-project-standards.md`. If a Solution Design Document exists for this area, treat its decisions as fixed and reference it rather than re-deciding architecture here.
+Platform assumptions (default: S/4HANA Cloud Private Edition, S/4HANA 2025; ABAP Cloud first), extensibility tiers, and naming are in `reference/sap-project-standards.md`. Fit-to-standard depth is in `reference/fit-to-standard-patterns.md`, `reference/l2c-standard-process-reference.md` and `reference/pricing-condition-technique-reference.md` — use them so the FS names real mechanisms rather than describing a custom build by default. If a Solution Design Document exists for this area, treat its decisions as fixed and reference it rather than re-deciding architecture here.
 
 ## Process
 
@@ -39,4 +45,4 @@ Platform assumptions (default: S/4HANA Cloud Private Edition, S/4HANA 2025; ABAP
 
 ## Handoff
 
-End every FS draft with a one-line summary of: extensibility decision made, remaining open questions count, and suggested next skill (`clean-core-extensibility-advisor` for a formal ADR if the decision is non-trivial, or `clean-abap-code-reviewer` once build starts).
+End every FS draft with a one-line summary of: extensibility decision made, remaining open questions count, and suggested next skill — `clean-core-extensibility-advisor` for a formal ADR if the decision is non-trivial, then `technical-design-writer` for the build-ready design.

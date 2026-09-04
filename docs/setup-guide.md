@@ -2,11 +2,20 @@
 
 ## Before anything: the ground-truth files
 
-`reference/sap-project-standards.md` and `reference/adt-mcp-usage.md` are cited by
-almost every skill. Keep the `reference/` folder next to `skills/` wherever you
-deploy, and edit `reference/sap-project-standards.md` first whenever a
-project-wide assumption changes (target edition, release, namespace, tier rules)
-— the skills read from it rather than hardcoding.
+The `reference/` folder is cited by almost every skill — **keep it next to
+`skills/` wherever you deploy**, or the fit-to-standard challenge degrades to
+generic advice.
+
+| File | What it drives |
+|---|---|
+| `sap-project-standards.md` | Platform, extensibility tiers, naming, released-API rules. Edit this first when a project-wide assumption changes. |
+| `adt-mcp-usage.md` | How skills use the live ABAP system |
+| `fit-to-standard-patterns.md` | The 48-pattern challenge catalog used in FS review and workshops |
+| `l2c-standard-process-reference.md` | Process spine, config objects, determinations, billing relevance, output |
+| `pricing-condition-technique-reference.md` | Condition technique depth, copy-control pricing type, settlement management |
+| `s4hana-simplification-redflags.md` | ECC→S/4 scan list for FS review |
+
+Add to the domain files after every engagement — that's the layer that compounds.
 
 ## ADT MCP (`adt-mcp`) — live ABAP system access
 
@@ -64,10 +73,10 @@ ATC, ABAP Unit) and, on explicit confirmation, writes (create/activate/transport
    `.github/prompts/` folder in your ABAP project repo. In VS Code Copilot
    Chat, run them with `/workshop-notes`, `/functional-spec-draft`,
    `/clean-core-extensibility-check`, `/clean-abap-review`,
-   `/abap-cloud-readiness`, `/coe-session-planner`, `/solution-design-review`,
-   `/rap-bo-scaffold`, `/cds-view-scaffold`, `/abap-unit-test`,
-   `/odata-service-expose` — select code/text first so `${selection}` has
-   something to work on. The generation prompts assume the standards in
+   `/abap-cloud-readiness`, `/coe-session-planner`, `/functional-spec-review`,
+   `/technical-design-draft`, `/solution-design-review`, `/rap-bo-scaffold`,
+   `/cds-view-scaffold`, `/abap-unit-test`, `/odata-service-expose` — select
+   code/text first so `${selection}` has something to work on. The generation prompts assume the standards in
    `reference/sap-project-standards.md`; copy `reference/` into the project repo
    too, or paste the relevant rules when Copilot can't see it.
 3. Keep this `sap-technical-assets` repo as the source of truth; re-copy

@@ -9,6 +9,8 @@ You act as the architect's second opinion on extensibility decisions, keeping ev
 
 Platform baseline, the tier order (0 config → 4 classic exception), naming, and the released-API check procedure are in `reference/sap-project-standards.md` — use it as ground truth (default: S/4HANA Cloud Private Edition, S/4HANA 2025). Live system checks: `reference/adt-mcp-usage.md` (read freely; never write).
 
+**Before deciding an extensibility tier, exhaust Tier 0.** `reference/fit-to-standard-patterns.md` is the catalog of what standard already does; `reference/l2c-standard-process-reference.md` and `reference/pricing-condition-technique-reference.md` hold the mechanism detail. Most requirements that reach this skill labelled "needs development" are configuration nobody checked — and pricing requirements in particular (a proposed VOFM requirement/AltCTy/AltCBV routine is Tier 4, so walk the pricing ladder in that file before accepting it).
+
 ## Two use cases
 
 ### 1. New requirement → extensibility decision
