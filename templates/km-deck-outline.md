@@ -44,6 +44,44 @@ verbatim, blank lines preserved. Write what you will actually say.
 - `[TIME: m:ss]` is optional; it prints small in the top-right corner as a
   pacing cue for the presenter.
 - `**bold**` and `` `code` `` render as real bold and monospace runs.
+- Every slide is drawn with explicit geometry on a blank layout, so nothing
+  inherits from a theme placeholder or overlaps.
+
+## Diagrams
+
+A slide can render its items as a **native, editable PowerPoint diagram**
+instead of bullets — shapes you can still nudge by hand afterwards. Items take
+the form `Label | detail`.
+
+````markdown
+## The Three Levels of AI Assistance
+[TIME: 3:00]
+DIAGRAM: ladder
+- Level 1 — Ungrounded | Plain Copilot. Generic ABAP from training data.
+- Level 2 — Instructed | + our instructions and prompt files.
+- Level 3 — Grounded | + MCP server. Reads the real system.
+CAPTION: The model does not get smarter between levels. We give it context.
+NOTES:
+...
+````
+
+| `DIAGRAM:` | Shape | Use for |
+|---|---|---|
+| `ladder` | Ascending steps with arrows, deepening colour | Progression, maturity levels, "good → better → best" |
+| `flow` | Left-to-right boxes with arrows | A process or sequence of steps |
+| `compare` | Side-by-side columns (last one accented) | Before/after, with/without, wrong/right |
+| `cycle` | Boxes in a row plus a "repeat" return arrow | A loop |
+
+- For `compare`, split the detail into bullet lines with **semicolons**:
+  `Bare Copilot | Direct SELECT; Invented field names; Classic style`
+- `CAPTION:` prints one bold line centred under the diagram — use it for the
+  sentence you want the room to remember.
+- Boxes size themselves to their text and fill the slide; long detail text is
+  the only thing that will make them ugly, so keep it short.
+
+**Use a diagram wherever the content is a progression, a comparison, or a
+process.** A developer audience disengages from a wall of bullets. Aim for at
+least three diagram slides in a 15-slide deck.
 
 ## Writing rules
 

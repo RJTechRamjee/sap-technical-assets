@@ -44,10 +44,11 @@ Setting that expectation now is what makes the adoption slide land later.
 
 ## The Three Levels of AI Assistance
 [TIME: 3:00]
-- **Level 1 — Ungrounded.** Plain Copilot, no configuration. Knows generic ABAP from its training data.
-- **Level 2 — Instructed.** Add repo-wide instructions and reusable prompt files. Now it knows *our* platform, standards, naming and Clean Core rules.
-- **Level 3 — Grounded / agentic.** Add the MCP server. Now it reads the *actual* objects, field lists and API release states from our system.
-- The model does not get smarter between levels. **We give it context.**
+DIAGRAM: ladder
+- Level 1 — Ungrounded | Plain Copilot, no configuration. Generic ABAP from its training data.
+- Level 2 — Instructed | + repo-wide instructions and prompt files. Knows **our** platform, standards, naming, Clean Core rules.
+- Level 3 — Grounded | + MCP server. Reads the **actual** objects, field lists and API release states from our system.
+CAPTION: The model does not get smarter between levels. We give it context.
 NOTES:
 This is the spine of the whole session. Spend the full three minutes; everything after this hangs off it.
 
@@ -95,10 +96,10 @@ State the safety rule clearly and early, because the next thing someone will wor
 
 ## DEMO 1 — Same Ask, Two Results
 [TIME: 10:00]
-- Ask a bare Copilot: *"create a CDS view for sales order items with customer data"*
-- Then: drop in `copilot-instructions.md`, run `/cds-view-scaffold`, same requirement
-- Watch what changes: `ZI_` / `ZC_` layering · released CDS as the source · `@UI` moved to a metadata extension · `[CONFIRM in ADT]` where it doesn't know
-- **Same model. Same question. We gave it our standards.**
+DIAGRAM: compare
+- Bare Copilot | Direct `SELECT` on standard tables; Invented field names, stated confidently; Classic, pre-7.4 ABAP style; No layering, no metadata extension; No idea what our release allows
+- + Instructions & `/cds-view-scaffold` | `ZI_` / `ZC_` layering; Released CDS as the data source; `@UI` moved to a metadata extension; Our naming and package conventions; `[CONFIRM in ADT]` where it doesn't know
+CAPTION: Same model. Same question. We gave it our standards.
 NOTES:
 DEMO — 10 minutes.
 
@@ -114,10 +115,10 @@ FALLBACK: play the pre-recorded run. Model behaviour varies and the bare version
 
 ## DEMO 2 — Grounding: Guessing vs Reading
 [TIME: 10:00]
-- Without MCP: *"what fields does `<our custom entity>` have, and is `<SAP object>` released?"* → a plausible, unverifiable answer
-- With MCP connected: the real field list, read from the system. The real API state.
-- Then a multi-step task: read the object → syntax check → report back
-- **Level 2 stops it inventing our standards. Level 3 stops it inventing our system.**
+DIAGRAM: compare
+- Without MCP | A plausible field list — that nobody can verify; "Yes, that's released" — on what basis?; Confident tone, no source; You cannot tell right from wrong by reading it
+- With MCP connected | The real field list, read from the system; The actual API release state; Visible tool calls — you see it reach in; Multi-step: read object → syntax check → report
+CAPTION: Level 2 stops it inventing our standards. Level 3 stops it inventing our system.
 NOTES:
 DEMO — 10 minutes. This is the centrepiece of the session.
 
@@ -174,11 +175,13 @@ Say plainly: I will not accept "Copilot wrote it" in a review, and neither shoul
 
 ## What to Do on Monday
 [TIME: 3:00]
-- Copy `.github/copilot-instructions.md` from `sap-technical-assets` into **your** project repo
-- Copy `.github/prompts/*.prompt.md` into the same repo
-- Use: `/rap-bo-scaffold` · `/cds-view-scaffold` · `/abap-unit-test` · `/odata-service-expose` · `/clean-abap-review` · `/abap-cloud-readiness`
-- **Select the code or spec text first** — that's what `${selection}` works on
-- Connect the ABAP MCP server for anything where system truth matters
+DIAGRAM: flow
+- 1. Copy | `.github/copilot-instructions.md` into **your** project repo
+- 2. Copy | `.github/prompts/*.prompt.md` into the same repo
+- 3. Select | Highlight the code or spec text first — that's `${selection}`
+- 4. Run | `/rap-bo-scaffold` · `/abap-unit-test` · `/clean-abap-review`
+- 5. Connect | The ABAP MCP server, when system truth matters
+CAPTION: Steps 1 and 2 take two minutes and are the biggest single win.
 NOTES:
 Three minutes, and make it concrete. Have the repo URL on screen.
 
