@@ -36,7 +36,19 @@ Fill `templates/km-session-template.md` completely:
 - Discussion questions that surface how this applies to *this team's* actual project work, not abstract SAP theory
 - A one-page "cheat sheet" takeaway section developers can screenshot and keep — this is often the highest-value artifact from the whole session
 
-Then produce a slide-by-slide deck outline in `templates/km-deck-outline.md` — 12–16 slides, one takeaway per slide, demo replaces slides rather than adding them.
+### Step 3b — Build the deck
+
+Write the deck as `docs/coe-sessions/decks/COE-S<nn>_<YYYY-MM-DD>_<topic-slug>.deck.md`
+following the format in `templates/km-deck-outline.md`, then build it:
+
+```bash
+python tools/build_deck.py docs/coe-sessions/decks/<deck>.deck.md
+```
+
+12–16 slides, one takeaway each; a demo replaces slides rather than adding them.
+**Speaker notes are what the presenter will actually say** — the lines to land
+verbatim, the questions to ask the room, and a `FALLBACK:` line on every demo
+slide. The session is not planned until the deck builds.
 
 ### Step 4 — Save the plan and log it
 

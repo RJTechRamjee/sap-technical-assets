@@ -61,10 +61,15 @@ templates/                 Shared output templates every tool fills in
 
 agents/                    Optional Claude Code subagent wrapper(s)
 
+tools/
+  build_deck.py            Builds a .pptx (speaker notes in the notes pane) from a .deck.md
+
 docs/
   setup-guide.md            How to install/use each tool's variant
   coe-session-log.md         Running history of KM sessions (append via coe-session-planner)
   coe-topic-backlog.md       Ranked backlog the session planner pulls from
+  coe-sessions/              Filled session plans, one file per session
+    decks/                   <deck>.deck.md source + generated .pptx
 ```
 
 ## Coverage by responsibility

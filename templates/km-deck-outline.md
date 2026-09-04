@@ -1,57 +1,89 @@
-# COE Session — Deck Outline
+# COE Session — Deck Authoring
 
-> Slide-by-slide outline for a 45–60 min session. Fill after the
-> `km-session-template.md` content is drafted. One row = one slide. Keep it to
-> 12–16 slides; a demo replaces slides, it doesn't add them.
->
-> The **Speaker notes** column is written to be pasted straight into the PowerPoint
-> notes pane — write what you will actually say, not a description of the slide.
+Decks are written as **`.deck.md`** files and built into a real `.pptx` with
+**speaker notes in the notes pane** by `tools/build_deck.py`. Write the markdown;
+never hand-edit the generated pptx (it gets overwritten on rebuild).
 
-## Header
+```
+docs/coe-sessions/decks/COE-S<nn>_<YYYY-MM-DD>_<topic-slug>.deck.md   ← you write this
+docs/coe-sessions/decks/COE-S<nn>_<YYYY-MM-DD>_<topic-slug>.pptx      ← generated
+```
 
-| Field | Value |
-|---|---|
-| Session # | |
-| Topic | |
-| Presenter | |
-| **`ppt_date_time`** | `YYYY-MM-DD HH:MM` + timezone |
-| Duration | 45 / 60 min |
-| Deck file | `COE-S<nn>_<YYYY-MM-DD>_<topic-slug>.pptx` |
-| Status | Outline / Deck built / Dry-run done / Delivered |
+## Build
 
-## Slides
+```bash
+pip install python-pptx          # once
+python tools/build_deck.py docs/coe-sessions/decks/<deck>.deck.md
+```
 
-| # | Slide title | Key visual / on-slide content | Speaker notes (→ PPT notes pane) | Time |
-|---|---|---|---|---|
-| 1 | Title | Topic, date, presenter | — | 0:30 |
-| 2 | Why this, why now | The trigger: release feature / review finding / decision pending | Anchor it to our project, not SAP theory | 1:30 |
-| 3 | What you'll be able to do after this | The 3 learning objectives, verbatim | Set the bar; tell them you'll check at the end | 1:00 |
-| 4 | The concept in one picture | Single diagram of the whole idea | The mental model everything else hangs on — spend time here | 2:00 |
-| 5–8 | Core walkthrough | One idea per slide, building on slide 4's diagram | Keep each slide to one takeaway | 12:00 |
-| 9 | Demo setup | What system, what we'll build/show, what "done" looks like | Say the fallback if it breaks | 1:00 |
-| 10 | DEMO | (live) — steps listed in `km-session-template.md` §5 | Narrate the *why* of each step, not the clicks | 12:00 |
-| 11 | Before / after on our code | A real (anonymized) example from our repo or reviews | Make it concrete to this team | 2:00 |
-| 12 | When NOT to use this | The boundaries / anti-patterns | Prevents cargo-culting | 1:30 |
-| 13 | Cheat sheet | The screenshot-and-keep slide | Read it aloud once; tell them to screenshot it | 1:00 |
-| 14 | How this applies to your current work item | 2 discussion prompts | Open the floor — name someone to start if it's quiet | 6:00 |
-| 15 | Links + next session teaser | SAP notes/docs, repo paths, next topic + `ppt_date_time` | — | 1:00 |
+Output is 16:9, one `.pptx` with every slide's speaker notes populated.
 
-## Demo dry-run checklist
+## Format
+
+````markdown
+# <Deck title>
+
+<!-- meta
+session: 01
+ppt_date_time: 2026-09-11 14:00 IST
+presenter: Ramjee
+subtitle: COE Session 01 · <one line>
+-->
+
+## <Slide title>
+[TIME: 2:00]
+- bullet, may use **bold** and `code`
+- another bullet
+  - sub-bullet (indent by two spaces)
+NOTES:
+Everything after NOTES: until the next `## ` becomes the speaker notes,
+verbatim, blank lines preserved. Write what you will actually say.
+````
+
+- The **first** `## ` slide becomes the title slide (meta fills the subtitle line).
+- `[TIME: m:ss]` is optional; it prints small in the top-right corner as a
+  pacing cue for the presenter.
+- `**bold**` and `` `code` `` render as real bold and monospace runs.
+
+## Writing rules
+
+- **12–16 slides** for 45–60 minutes. A demo *replaces* slides, it doesn't add them.
+- **One takeaway per slide.** If a slide needs two, it's two slides.
+- **Speaker notes are what you say, not what the slide shows.** Include the lines
+  you want to land verbatim, the questions to ask the room, and the demo fallback.
+- Every demo slide's notes must carry a **FALLBACK** line — what you do when the
+  live demo fails.
+- Include one **"screenshot this"** cheat-sheet slide. It is usually the highest-
+  value artifact from the whole session.
+- Close on the next session's teaser, verbatim.
+
+## Standard shape (adapt, don't follow blindly)
+
+| # | Slide | Time |
+|---|---|---|
+| 1 | Title | 0:30 |
+| 2 | Why this, why now | 1:30 |
+| 3 | What you'll be able to do (the objectives) | 1:00 |
+| 4 | The concept in one picture — the frame everything hangs on | 3:00 |
+| 5–7 | Core walkthrough, one idea per slide | 6:00 |
+| 8–10 | **DEMO** slides — setup, the demo itself, the guardrail | 25:00 |
+| 11 | Where it fails / when not to use it | 8:00 |
+| 12 | The rules that don't change | 2:00 |
+| 13 | What to do on Monday | 3:00 |
+| 14 | Cheat sheet — "screenshot this one" | 1:00 |
+| 15 | Discussion + next session | 5:00 |
+
+## Dry-run checklist
 
 - [ ] Ran the full demo end-to-end today, on the session system
-- [ ] Recording / screenshots captured as fallback
-- [ ] Sample data pre-loaded
+- [ ] Recording / screenshots captured as fallback for **every** demo slide
+- [ ] Sample data pre-loaded; the demo object is one the audience recognises
 - [ ] Editor font size up, notifications off
-- [ ] Cheat sheet exported to PDF and linked in the log
-
-## Notes
-
-**Build notes** — where each slide's content came from, anything to reuse next time.
-
-**Dry-run notes** — timing per section, what needs cutting.
+- [ ] Deck rebuilt after the last content edit
+- [ ] Cheat-sheet slide exported to PDF and linked in the session log
 
 ## Post-session
 
-- [ ] Row appended to `docs/coe-session-log.md` with `ppt_date_time`, deck file and materials link
+- [ ] Session log row updated: status, recording link
 - [ ] Backlog re-ranked; next topic confirmed with its `ppt_date_time`
-- [ ] Delivery notes and feedback captured in `km-session-template.md` §9–§10
+- [ ] Delivery notes and feedback captured in the session plan §9–§10

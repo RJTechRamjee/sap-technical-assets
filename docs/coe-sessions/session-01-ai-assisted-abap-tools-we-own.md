@@ -8,7 +8,7 @@
 | **`ppt_date_time`** | `2026-09-11 14:00 IST` `[CONFIRM — day/time slot not yet fixed]` |
 | Duration | 60 min |
 | Meeting link | `[CONFIRM]` |
-| Deck file | `COE-S01_2026-09-11_ai-assisted-abap.pptx` |
+| Deck file | [`COE-S01_2026-09-11_ai-assisted-abap.pptx`](decks/COE-S01_2026-09-11_ai-assisted-abap.pptx) — 15 slides, speaker notes in the notes pane. Source: [`.deck.md`](decks/COE-S01_2026-09-11_ai-assisted-abap.deck.md); rebuild with `python tools/build_deck.py <deck>.deck.md` |
 | Recording link | (fill after delivery) |
 | Audience | ABAP developer community (offshore) |
 | Status | Planned |
