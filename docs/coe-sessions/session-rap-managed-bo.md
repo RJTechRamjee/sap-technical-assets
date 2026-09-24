@@ -2,16 +2,16 @@
 
 | Field | Value |
 |---|---|
-| Session # | 02 |
+| Session # | TBD — unscheduled, back in backlog (was S02) |
 | Topic | RAP managed Business Object end-to-end for classic ABAP developers |
 | Presenter | Ramjee |
-| **`ppt_date_time`** | `2026-09-25 14:00 IST` `[CONFIRM — day/time slot not yet fixed]` |
+| **`ppt_date_time`** | TBD — bumped from `2026-09-25` to make room for the workspace-organization session |
 | Duration | 60 min |
 | Meeting link | `[CONFIRM]` |
-| Deck file | `COE-S02_2026-09-25_rap-managed-bo.pptx` |
+| Deck file | TBD — not yet built |
 | Recording link | (fill after delivery) |
 | Audience | ABAP developer community (offshore) |
-| Status | Planned |
+| Status | Draft — content ready, unscheduled (see `docs/coe-topic-backlog.md`) |
 | Related SAP note / doc links | SAP Help — ABAP RESTful Application Programming Model (RAP) development guide, S/4HANA 2025 `[CONFIRM current link]` |
 | Related repo assets | `skills/abap-object-generator/SKILL.md` (Mode 1), `skills/technical-design-writer/SKILL.md` §6, `reference/sap-project-standards.md` §5–§6 |
 

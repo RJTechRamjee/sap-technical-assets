@@ -85,7 +85,8 @@ Be specific and honest; this is what earns developer trust:
 - **Doesn't know our released-API set** — it has no idea what is released in
   S/4HANA 2025, and Private Edition will happily compile the mistake.
 - **Confidently wrong on RAP save-sequence rules** — side effects in the wrong
-  handler, missing `FAILED` alongside `REPORTED`. Leads directly into session 2.
+  handler, missing `FAILED` alongside `REPORTED`. A theme we'll return to in a
+  dedicated RAP session once it's scheduled.
 - **Generates tests that assert the implementation, not the rule** — they pass, and
   they prove nothing.
 - **Knows nothing of our naming, packages or transports** unless we tell it.
@@ -104,7 +105,7 @@ Every one of these is an argument for level 2 and level 3, not against the tooli
 4. Connect the ABAP MCP server for anything where system truth matters.
 5. **The two guardrails:**
    - **Released-API rules are unchanged.** A generated `SELECT` on a non-released
-     table is still a Clean Core violation. Session 3 is the check itself.
+     table is still a Clean Core violation. A future session covers the check itself.
    - **Generated code is reviewed like hand-written code, and the author owns it.**
      "Copilot wrote it" is not a defence in review.
 
@@ -145,7 +146,8 @@ Every one of these is an argument for level 2 and level 3, not against the tooli
 1. Ask for something that would consume a non-released object.
 2. Show what comes back — it will look fine.
 3. Run `/clean-abap-review` on it and watch it flagged 🔴.
-4. Punchline: **the tooling helps; the contract does not move.** Hook to session 3.
+4. Punchline: **the tooling helps; the contract does not move.** This is the
+   released-API check, coming back as its own session later in the cadence.
 
 **Fallback:** capture all three demos as recordings during the dry run.
 Specifically pre-record Demo 1's level-1 output — model behaviour varies between
@@ -212,7 +214,9 @@ the room if the meeting format allows — adoption drops sharply if it's homewor
 
 Deliberately out of scope: Joule (no licence), SAP's delivered ABAP MCP Server
 (entitlement), and the ABAP AI SDK / ISLM — the last is a genuine follow-up now
-that BTP + AI Core is available, proposed as S04.
+that BTP + AI Core is available, proposed as a later session once the current
+resequencing (workspace-organization now takes S02; RAP and released-API
+content are drafted and back in the backlog) settles.
 
 **Delivery notes** — (fill after the session)
 
@@ -225,6 +229,6 @@ that BTP + AI Core is available, proposed as S04.
 
 | Field | Value |
 |---|---|
-| Proposed topic | RAP managed Business Object end-to-end for classic ABAP developers |
+| Proposed topic | Organizing one workspace for VS Code + Eclipse ABAP development — skills, prompts, rules (developer + architect day-to-day) |
 | Proposed `ppt_date_time` | `2026-09-25 14:00 IST` `[CONFIRM]` |
-| Why this next | Session 1 showed the tooling will generate RAP behavior code that looks right. Session 2 is the judgement to tell whether it *is* right — whether a rule belongs in a determination or a validation, and what the save sequence will and won't allow. The tool is only as good as the developer supervising it. |
+| Why this next | Session 1 sold the three-level tooling stack and told everyone to copy the repo assets into their own project. Session 2 is the practical follow-through: the same workspace behaves differently in VS Code than in Eclipse (Copilot prompt files, custom instructions, and Claude Code's own IDE support are not at parity), so this session sets the actual day-to-day habits for developers and architects before those habits calcify around a wrong assumption. RAP managed BO and the released-API contract session are both drafted and queued next in the backlog. |

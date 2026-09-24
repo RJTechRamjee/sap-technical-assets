@@ -1,0 +1,6 @@
+# Generated deck binaries — built from .deck.md source via tools/build_deck.py
+*.pptx
+*.thmx
+
+# Local Claude Code settings
+.claude/settings.local.json

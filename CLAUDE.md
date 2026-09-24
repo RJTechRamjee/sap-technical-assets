@@ -47,7 +47,21 @@ gemini/        Copy-paste prompt templates for Gemini Notebook (source-grounded 
 templates/     Shared output templates every tool fills in (FS, SDD, ADR, checklists, KM)
 agents/        Claude Code subagent wrappers
 docs/          setup-guide.md, coe-session-log.md, coe-topic-backlog.md
+examples/      Worked example repos handed to session attendees
+tools/         build_deck.py (.deck.md -> branded .pptx), make_template.ps1
 ```
+
+## COE session decks
+
+- Decks are **generated**, never hand-edited in PowerPoint — a manual restyle is
+  lost on the next `python tools/build_deck.py <deck>.deck.md`. Edit the
+  `.deck.md` and rebuild.
+- Every deck inherits the Accenture master via `tools/coe-template.pptx`
+  (generated from the `.thmx` by `tools/make_template.ps1`). **Colours** come
+  from the corporate theme; the typeface stays Segoe UI — the theme's Graphik is
+  wider and overflows the fixed title geometry.
+- Sessions are delivered to a community with **GitHub Copilot only**. Never put
+  Claude, or any tool the audience has no licence for, in a session deck or doc.
 
 ## Authoring rules
 

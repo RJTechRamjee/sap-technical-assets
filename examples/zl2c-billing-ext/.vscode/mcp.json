@@ -1,0 +1,30 @@
+{
+  "$comment": [
+    "Workspace-scoped MCP server config. This is the ONE Copilot-related file",
+    "that does not live in .github/ -- and it is meant to be committed, so the",
+    "whole team gets the same servers.",
+    "Never hardcode credentials here. Use ${input:...} so VS Code prompts for",
+    "the secret and stores it outside the repo."
+  ],
+  "inputs": [
+    {
+      "id": "adt-password",
+      "type": "promptString",
+      "description": "ABAP system password",
+      "password": true
+    }
+  ],
+  "servers": {
+    "abap-adt": {
+      "$comment": "[CONFIRM] Replace with your project's actual ADT MCP server command and host.",
+      "command": "npx",
+      "args": ["-y", "<your-adt-mcp-package>"],
+      "env": {
+        "SAP_HOST": "https://your-dev-system.example.com",
+        "SAP_CLIENT": "100",
+        "SAP_USER": "your-user",
+        "SAP_PASSWORD": "${input:adt-password}"
+      }
+    }
+  }
+}

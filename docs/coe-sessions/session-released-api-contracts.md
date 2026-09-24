@@ -2,16 +2,16 @@
 
 | Field | Value |
 |---|---|
-| Session # | 03 |
+| Session # | TBD — unscheduled, back in backlog (was S03) |
 | Topic | Reading a released-API contract in ADT — what "Released" actually means |
 | Presenter | Ramjee |
-| **`ppt_date_time`** | `2026-10-09 14:00 IST` `[CONFIRM — day/time slot not yet fixed]` |
+| **`ppt_date_time`** | TBD — bumped from `2026-10-09` while sessions 2–3 are resequenced |
 | Duration | 45 min |
 | Meeting link | `[CONFIRM]` |
-| Deck file | `COE-S03_2026-10-09_released-api-contracts.pptx` |
+| Deck file | TBD — not yet built |
 | Recording link | (fill after delivery) |
 | Audience | ABAP developer community (offshore) |
-| Status | Planned |
+| Status | Draft — content ready, unscheduled (see `docs/coe-topic-backlog.md`) |
 | Related SAP note / doc links | SAP Business Accelerator Hub; SAP Help — ABAP Cloud / released objects for S/4HANA 2025 `[CONFIRM current links]` |
 | Related repo assets | `reference/sap-project-standards.md` §4, §7 · `reference/adt-mcp-usage.md` · `skills/abap-cloud-readiness-checker/SKILL.md` · `skills/clean-core-extensibility-advisor/SKILL.md` |
 

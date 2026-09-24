@@ -1,0 +1,45 @@
+// Demo artefact for COE Session 02.
+// Exists so the `applyTo: '**/*.asbdef'` glob in
+// .github/instructions/rap-behaviour.instructions.md has something to match.
+
+managed implementation in class zbp_r_billingdocext unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_BillingDocItemExt alias BillingDocItemExt
+persistent table zbill_item_ext
+draft table zbill_item_ext_d
+lock master
+authorization master ( instance )
+etag master LastChangedAt
+{
+  field ( readonly ) BillingDocument, BillingDocumentItem;
+  field ( readonly, numbering : managed ) CreatedBy, CreatedAt,
+                                          LastChangedBy, LastChangedAt;
+
+  create;
+  update;
+  delete;
+
+  // Read only. Never modifies data -- reports through FAILED / REPORTED.
+  validation validateSettlementGroup on save { create; field SettlementGroup; }
+
+  // Modifies its own entity only. Trigger fields declared narrowly on purpose:
+  // an `on modify` without a field list costs you on every single save.
+  determination deriveAccruedAmount on modify { field DeferredRevenue; }
+
+  draft determine action Prepare
+  {
+    validation validateSettlementGroup;
+  }
+
+  mapping for zbill_item_ext
+  {
+    BillingDocument     = billing_document;
+    BillingDocumentItem = billing_document_item;
+    SettlementGroup     = settlement_group;
+    DeferredRevenue     = deferred_revenue;
+    AccruedAmount       = accrued_amount;
+    Currency            = currency;
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(python tools/build_deck.py \"docs/coe-sessions/decks/COE-S02_2026-09-25_workspace-organization.deck.md\")",
+      "PowerShell(python tools/build_deck.py \"docs/coe-sessions/decks/COE-S01_2026-09-11_ai-assisted-abap.deck.md\" -o \"$env:TEMP\\\\s01_check.pptx\"; if \\($?\\) { python -c \"from pptx import Presentation; a=Presentation\\(r'docs/coe-sessions/decks/COE-S01_2026-09-11_ai-assisted-abap.pptx'\\); b=Presentation\\(r'$env:TEMP\\\\s01_check.pptx'\\); print\\('slides old/new:', len\\(a.slides._sldIdLst\\), len\\(b.slides._sldIdLst\\)\\); print\\('shape counts match:', [len\\(s.shapes\\) for s in a.slides]==[len\\(s.shapes\\) for s in b.slides]\\)\" })"
+    ]
+  }
+}

@@ -31,9 +31,30 @@ Instead of bullets, a slide may declare a diagram. Items are `Label | detail`.
     DIAGRAM: flow        left-to-right boxes with arrows - a process
     DIAGRAM: compare     side-by-side columns - before/after, with/without
     DIAGRAM: cycle       boxes in a loop - repeating process
+    DIAGRAM: tree        a folder tree - indent sets depth, guides are drawn
+    DIAGRAM: snippet     a verbatim monospace block - file contents, frontmatter
+
+`tree` and `snippet` take their depth from the bullet indentation and render
+monospace. The optional `| annotation` is right-aligned beside the row:
+
+    DIAGRAM: tree
+    - zl2c-ext/
+      - .github/
+        - copilot-instructions.md | always on, every request
+        - instructions/
+          - cds-views.instructions.md | applyTo glob
 
 Every slide is drawn from a blank layout with explicit geometry, so nothing
 inherits or overlaps.
+
+Branding
+--------
+Decks are built on `tools/coe-template.pptx`, generated from the corporate
+`.thmx` so slides inherit the Accenture master (logo, footer, slide numbers).
+Only the COLOURS come from that theme - the typeface stays Segoe UI, because the
+theme's Graphik is wider and overflows the fixed title geometry.
+
+Regenerate the template only when the theme changes:  pwsh tools/make_template.ps1
 
 Install once:  pip install python-pptx
 """
@@ -54,19 +75,30 @@ try:
 except ImportError:  # pragma: no cover
     sys.exit("python-pptx is not installed. Run: pip install python-pptx")
 
+# ---------------------------------------------------------------- template ---
+# The corporate master. Generated once from "Acn Theme.thmx" and committed, so a
+# build does not depend on PowerPoint being installed. Regenerate with:
+#   tools/make_template.ps1
+TEMPLATE = Path(__file__).with_name("coe-template.pptx")
+BLANK_LAYOUT = "Blank"
+
 # ---------------------------------------------------------------- palette ---
-INK = RGBColor(0x1A, 0x1A, 0x1A)
+# Values taken from the theme's own colour scheme, not eyeballed:
+#   accent1 7500C0 · accent2 C2A3FF · accent3 E6DCFF · lt2 460073 · dk2 A100FF
+INK = RGBColor(0x00, 0x00, 0x00)
 MUTED = RGBColor(0x5A, 0x5A, 0x5A)
-ACCENT = RGBColor(0x0A, 0x6E, 0xD1)
-ACCENT_DK = RGBColor(0x05, 0x4A, 0x8F)
+ACCENT = RGBColor(0x75, 0x00, 0xC0)  # accent1
+ACCENT_DK = RGBColor(0x46, 0x00, 0x73)  # lt2 - dark purple, for text on light
 WHITE = RGBColor(0xFF, 0xFF, 0xFF)
+PANEL_FILL = RGBColor(0xF8, 0xF4, 0xFE)
+PANEL_LINE = RGBColor(0xDC, 0xCC, 0xF5)
 # Progressive fills for ladder/flow steps (light -> saturated)
 TINTS = [
-    RGBColor(0xE8, 0xF1, 0xFB),
-    RGBColor(0xC7, 0xDF, 0xF6),
-    RGBColor(0x8F, 0xC0, 0xEC),
-    RGBColor(0x4E, 0x9B, 0xDE),
-    RGBColor(0x0A, 0x6E, 0xD1),
+    RGBColor(0xF4, 0xEC, 0xFF),
+    RGBColor(0xE6, 0xDC, 0xFF),  # accent3
+    RGBColor(0xC2, 0xA3, 0xFF),  # accent2
+    RGBColor(0x9E, 0x57, 0xE3),
+    RGBColor(0x75, 0x00, 0xC0),  # accent1
 ]
 
 # 16:9 canvas
@@ -77,6 +109,8 @@ BODY_TOP = Inches(1.75)
 BODY_W = Inches(11.83)
 BODY_H = Inches(5.15)
 
+# Typeface stays Segoe UI deliberately: only the COLOURS come from the corporate
+# theme. Graphik is wider, and swapping it in overflows the fixed title geometry.
 FONT = "Segoe UI"
 MONO = "Consolas"
 
@@ -137,24 +171,34 @@ def parse_deck(text: str) -> tuple[dict, list[dict]]:
 
 
 # ------------------------------------------------------------------- text ---
+CODE_SPAN = re.compile(r"(`[^`]+?`)")
+
+
+def _run(para, text: str, size: int, color, bold: bool, mono: bool) -> None:
+    run = para.add_run()
+    run.text = text
+    run.font.size = Pt(size)
+    run.font.color.rgb = color
+    run.font.name = MONO if mono else FONT
+    run.font.bold = bold
+
+
 def rich(para, text: str, size: int, color=INK, bold=False) -> None:
-    """Write text into a paragraph, honouring **bold** and `code`."""
+    """Write text into a paragraph, honouring **bold** and `code`, including
+    `code` nested inside **bold** — which the flat split would emit literally."""
     for token in INLINE.split(text):
         if not token:
             continue
-        run = para.add_run()
-        run.font.size = Pt(size)
-        run.font.color.rgb = color
-        run.font.name = FONT
-        run.font.bold = bold
         if token.startswith("**") and token.endswith("**"):
-            run.text = token[2:-2]
-            run.font.bold = True
+            for part in CODE_SPAN.split(token[2:-2]):
+                if not part:
+                    continue
+                code = part.startswith("`") and part.endswith("`")
+                _run(para, part[1:-1] if code else part, size, color, True, code)
         elif token.startswith("`") and token.endswith("`"):
-            run.text = token[1:-1]
-            run.font.name = MONO
+            _run(para, token[1:-1], size, color, bold, True)
         else:
-            run.text = token
+            _run(para, token, size, color, bold, False)
 
 
 def textbox(slide, left, top, width, height):
@@ -373,15 +417,143 @@ def draw_compare(slide, items, top_in: float, avail_in: float):
             Inches(top + head_h + 0.08),
             Inches(w),
             Inches(body_h),
-            RGBColor(0xF7, 0xF9, 0xFC),
-            RGBColor(0xD5, 0xDF, 0xEA),
+            PANEL_FILL,
+            PANEL_LINE,
         )
         frame = body.text_frame
         frame.vertical_anchor = MSO_ANCHOR.TOP
         for j, line in enumerate(x.strip() for x in detail.split(";") if x.strip()):
             p = frame.paragraphs[0] if j == 0 else frame.add_paragraph()
+            p.alignment = PP_ALIGN.LEFT
             p.space_after = Pt(8)
             rich(p, "•  " + line, bullet_pt)
+            hanging_indent(p, 0.26)
+
+
+def _tree_prefixes(items) -> list[str]:
+    """Guide strings ('|  ', '+- ', '`- ') derived from the indent levels."""
+    levels = [lvl for lvl, _ in items]
+    n = len(levels)
+
+    # Is row i the last child at its own level, within its parent's subtree?
+    last = []
+    for i, lvl in enumerate(levels):
+        is_last = True
+        for j in range(i + 1, n):
+            if levels[j] < lvl:
+                break
+            if levels[j] == lvl:
+                is_last = False
+                break
+        last.append(is_last)
+
+    prefixes = []
+    for i, lvl in enumerate(levels):
+        parts = []
+        for depth in range(1, lvl):
+            ancestor = next((j for j in range(i - 1, -1, -1) if levels[j] == depth), None)
+            parts.append("    " if ancestor is None or last[ancestor] else "│   ")
+        if lvl:
+            parts.append("└── " if last[i] else "├── ")
+        prefixes.append("".join(parts))
+    return prefixes
+
+
+# Monospace blocks set an EXACT leading (line_spacing in points, not a multiple)
+# so the panel height is computed, not guessed: a multiplier would be applied on
+# top of the font's own ~1.17x line height and silently overflow the panel.
+MONO_LEAD = 1.30  # leading as a multiple of the point size
+MONO_PAD_V = 0.44  # top + bottom margin inside the panel, inches
+MONO_CHAR_W = 0.55  # Consolas advance width as a fraction of the point size
+MONO_SLACK = 0.12  # clearance so the last row never sits on the rounded border
+
+
+def _mono_fit(rows: list[tuple[str, str]], avail_in: float, usable_w: float) -> float:
+    """Largest point size at which every row fits the panel, in height and width."""
+    widest = max(
+        (len(code) + (len(note) + 4 if note else 0) for code, note in rows), default=1
+    )
+    by_width = usable_w * 72.0 / (MONO_CHAR_W * max(widest, 1))
+    by_height = (avail_in - MONO_PAD_V - MONO_SLACK) * 72.0 / (
+        MONO_LEAD * max(len(rows), 1)
+    )
+    return max(8.0, min(17.0, by_width, by_height))
+
+
+def _mono_block(slide, rows, top_in, avail_in, guides: bool):
+    """Shared renderer for `tree` and `snippet`: a monospace panel of rows."""
+    panel_w = 13.333 - 2 * 0.75
+    usable_w = panel_w - 0.58
+    pt = _mono_fit(rows, avail_in, usable_w)
+    lead = pt * MONO_LEAD
+    block_h = min(len(rows) * lead / 72.0 + MONO_PAD_V, avail_in)
+    top = top_in + max((avail_in - block_h) / 2, 0)
+
+    panel = box_shape(
+        slide,
+        Inches(0.75),
+        Inches(top),
+        Inches(panel_w),
+        Inches(block_h),
+        PANEL_FILL,
+        PANEL_LINE,
+    )
+    frame = panel.text_frame
+    frame.word_wrap = False  # a wrapped code line would break the column alignment
+    frame.vertical_anchor = MSO_ANCHOR.TOP
+    frame.margin_left = Inches(0.29)
+    frame.margin_top = Inches(MONO_PAD_V / 2)
+    frame.margin_bottom = Inches(MONO_PAD_V / 2)
+
+    pad = max((len(code) for code, note in rows if note), default=0) + 3
+
+    for i, (code, note) in enumerate(rows):
+        p = frame.paragraphs[0] if i == 0 else frame.add_paragraph()
+        p.alignment = PP_ALIGN.LEFT  # paragraphs[0] would otherwise inherit centre
+        p.space_before = Pt(0)
+        p.space_after = Pt(0)
+        p.line_spacing = Pt(lead)
+
+        # A folder row in a tree, or a YAML `---` fence in a snippet, reads as structure.
+        folder = guides and code.rstrip().endswith("/")
+        run = p.add_run()
+        run.text = code
+        run.font.size = Pt(pt)
+        run.font.name = MONO
+        run.font.bold = folder
+        run.font.color.rgb = ACCENT_DK if folder else INK
+
+        if note:
+            gap = p.add_run()
+            gap.text = " " * max(pad - len(code), 2)
+            gap.font.size = Pt(pt)
+            gap.font.name = MONO
+
+            label = p.add_run()
+            label.text = note
+            label.font.size = Pt(max(pt - 1.5, 8.0))
+            label.font.name = FONT
+            label.font.italic = True
+            label.font.color.rgb = MUTED
+
+
+def draw_tree(slide, items, top_in: float, avail_in: float):
+    """A folder tree. Indent sets depth; the guide characters are drawn here."""
+    prefixes = _tree_prefixes(items)
+    rows = []
+    for prefix, (_, text) in zip(prefixes, items):
+        name, note = split_item(text)
+        rows.append((prefix + name, note))  # verbatim: '*' and '`' are literal here
+    _mono_block(slide, rows, top_in, avail_in, guides=True)
+
+
+def draw_snippet(slide, items, top_in: float, avail_in: float):
+    """A verbatim monospace block - file contents, frontmatter, config."""
+    rows = []
+    for level, text in items:
+        code, note = split_item(text)
+        rows.append(("  " * level + code, note))  # verbatim: '*' and '`' are literal
+    _mono_block(slide, rows, top_in, avail_in, guides=False)
 
 
 DIAGRAMS = {
@@ -389,6 +561,8 @@ DIAGRAMS = {
     "flow": draw_flow,
     "compare": draw_compare,
     "cycle": draw_cycle,
+    "tree": draw_tree,
+    "snippet": draw_snippet,
 }
 
 
@@ -412,6 +586,13 @@ def add_title(slide, text: str, time: str) -> None:
         rich(tf.paragraphs[0], time, 12, ACCENT, bold=True)
 
 
+def hanging_indent(para, inches: float) -> None:
+    """Wrapped lines line up under the text, not back at the bullet glyph."""
+    pPr = para._p.get_or_add_pPr()
+    pPr.set("marL", str(int(inches * 914400)))
+    pPr.set("indent", str(int(-inches * 914400)))
+
+
 def add_bullets(slide, items) -> None:
     frame = textbox(slide, MARGIN, BODY_TOP, BODY_W, BODY_H)
     size = 19 if len(items) <= 6 else 17
@@ -420,12 +601,25 @@ def add_bullets(slide, items) -> None:
         p.space_after = Pt(11 if level == 0 else 5)
         indent = "    " * level
         rich(p, f"{indent}{'–' if level else '•'}  {text}", size - level)
+        hanging_indent(p, 0.30 + 0.34 * level)
+
+
+def blank_layout(prs):
+    """The corporate master's empty layout, or the stock blank as a fallback."""
+    for layout in prs.slide_layouts:
+        if layout.name.strip().lower() == BLANK_LAYOUT.lower():
+            return layout
+    return prs.slide_layouts[6]
 
 
 def build(meta: dict, slides: list[dict], out: Path) -> None:
-    prs = Presentation()
+    if TEMPLATE.exists():
+        prs = Presentation(str(TEMPLATE))
+    else:
+        print(f"warning: {TEMPLATE.name} not found - building unbranded", file=sys.stderr)
+        prs = Presentation()
     prs.slide_width, prs.slide_height = SLIDE_W, SLIDE_H
-    blank = prs.slide_layouts[6]
+    blank = blank_layout(prs)
 
     for index, slide_spec in enumerate(slides):
         s = prs.slides.add_slide(blank)

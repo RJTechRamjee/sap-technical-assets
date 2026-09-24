@@ -141,7 +141,7 @@ DEMO — 5 minutes. Short and pointed.
 
 The important beat: the generated code looks fine. Nobody reading it casually would object. That's why the check exists and why review doesn't get easier just because a machine wrote it.
 
-This is the hook into session 3, which is entirely about that check. Say so.
+Flag that a future session is entirely about that check — don't name a session number, it isn't scheduled yet.
 
 Closing line: "The tooling helps. The contract does not move."
 
@@ -160,7 +160,7 @@ Invite examples: "who has had it invent a field name?" Let two or three people t
 
 Then close the loop: every single failure on this slide is an argument FOR level 2 and level 3, not against the tooling. The unconfigured tool fails this way. The configured, grounded one fails less.
 
-The RAP bullet is a deliberate hook into session 2 — flag it.
+The RAP bullet is a flag for a future dedicated RAP session — don't promise a session number here, just name it as coming.
 
 ## The Two Rules That Don't Change
 [TIME: 2:00]
@@ -205,13 +205,13 @@ This slide is the artefact that outlives the session. Export it to PDF and put t
 [TIME: 5:00]
 - Where did Copilot last give you something **confidently wrong** in ABAP — and what would have caught it: the instructions, the MCP connection, or review?
 - If an agent can read objects, run syntax checks and touch transport requests — what should it **never** do without a human approving it first?
-- **Next: Session 02, 25 Sept — RAP managed Business Object end-to-end**
-- *It will write you a determination where the rule should have been a validation. Session 2 is how you tell.*
+- **Next: Session 02, 25 Sept — organizing one workspace for VS Code + Eclipse**
+- *You just installed these assets in your own repo. Session 2 is which of them actually work once you're inside Eclipse instead of VS Code.*
 NOTES:
 Five minutes of discussion. If the room is quiet, name someone whose work you know touches this.
 
 Question 2 is the one to protect time for — it's the start of our agent governance policy, and the answers should go into the follow-ups table in the session plan. This is genuinely undecided on the project; their input shapes it.
 
-Close on the session 2 teaser verbatim: "It will write you a determination where the rule should have been a validation. Session 2 is how you tell."
+Close on the session 2 teaser verbatim: "You just installed these assets in your own repo. Session 2 is which of them actually work once you're inside Eclipse instead of VS Code."
 
 Then: thank them, remind them of the file copy, end on time.
